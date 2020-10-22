@@ -1,8 +1,6 @@
-# Machine Precision :
-# Computer numbers (floating point numbers) are a finite subset of rational numbers.
-# There is a smallest positive computer number ε so that 1+ε > 1.
-
-# Berkeley : https://math.berkeley.edu/~mgu/MA128AFall2017/MA128ALectureWeek2.pdf
+# Ex2 - Monday Oct 19, 2020
+# Name: Sagie Baram, ID: 205591829
+# Name: Eden Mozes, ID: 315997049
 
 def machinePercisionFinder(epsilon):
     while (1 + epsilon) != 1:
