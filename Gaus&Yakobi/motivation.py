@@ -30,19 +30,20 @@ b = [2, 6, 5]
 #   |___________|
 
 
+# Pattern b[i] minus anything not current variable column divided by dominant.
 xn_1 = lambda x, y, z: (b[0] - matrix[0][1] * y - matrix[0][2] * z) / matrix[0][0]
 yn_1 = lambda x, y, z: (b[1] - matrix[1][0] * x - matrix[1][2] * z) / matrix[1][1]
 zn_1 = lambda x, y, z: (b[2] - matrix[2][0] * x - matrix[2][1] * y) / matrix[2][2]
 
 x0, y0, z0, count = 0, 0, 0, 0
 xn, yn, zn = 0, 0, 0
-epsilon = 0.000000001
+epsilon = 0.000000001  # needed this much to get the same results (25 rows)
 condition = True
 
 print((f"\t Xn+1\t\t Yn+1\t\t Zn+1"))
 while condition:
     print(f"{count+1})\t|{xn:.6f}|\t|{yn:.6f}|\t|{zn:.6f}|")
-    # GAUSSIAN METHOD
+    # GAUSSIAN METHOD - TOGGLE
     xn = xn_1(x0, y0, z0)
     yn = yn_1(xn, y0, z0)
     zn = zn_1(xn, yn, z0)
