@@ -1,8 +1,10 @@
-<h1>GAUS & JACOBI ITERATIVE METHODS</h1>
+<h1>GUASS & JACOBI ITERATIVE METHODS</h1>
 <b><u>TODO:</b></u>
 
-- [x] Gaus Iterative method
-- [ ] Jacobi Iterative method
+- [x] Guass Seidal method
+- [ ] Jacobi method
+- [ ] Add dominant diagonal function
+- [ ] Add matrix generator
 
 ```python syntax
 max_iteration = 25
