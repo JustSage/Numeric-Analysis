@@ -14,7 +14,13 @@ def func(a, b, c, d, e):
 
     @return an absolute value of the computation formula.
     """
-    return abs(a * (b / c - d) - e)
+    try:
+        return abs(a * (b / c - d) - e)
+    except ZeroDivisionError:
+        print("can't divide by 0 (var3 = 0)")
+        c = 1
+    finally:
+        return abs(a * (b / c - d) - e)
 
 
 def __main__():
@@ -33,6 +39,7 @@ def __main__():
     var5 = float(input("Enter var 5: "))
 
     result = func(var1, var2, var3, var4, var5) - sys.float_info.epsilon
+
     print("The result is: ", result)
 
 
