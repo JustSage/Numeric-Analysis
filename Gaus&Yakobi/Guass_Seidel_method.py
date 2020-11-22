@@ -38,28 +38,29 @@ def linear_system_iterative_method(matrix, result, x_variables):
         x_variables - the variable column matrix (x)
     """
     size = len(matrix)
+    var = x_variables
     for col in range(0, size):
         holder = result[col]
         for row in range(0, size):
             if col != row:  # if not diagonal index
-                holder -= matrix[col][row] * x_variables[row]
+                holder -= matrix[col][row] * var[row]
                 # calculating variables x**(val=0,1,2,3,...)
-        x_variables[col] = holder / matrix[col][col]
+        var[col] = holder / matrix[col][col]
         # divide by dominant diagonal
-    return x_variables  # returns the updated values.
+    return var  # returns the updated values.
 
 
 def check_epsilon(epsilon, solution, next_solution):
     xr = solution[0]
     xr_1 = next_solution[0]
     check = abs(xr_1 - xr)
-    return check < epsilon
+    return check > epsilon
 
 
 # Data Input (from class)
 
 max_iterations = int(input("Enter maximum iterations: "))
-x = [0, 0, 0]  # guess
+guess = [0, 0, 0]  # guess
 
 # convergence = false
 matrix = [[4, 2, 0], [2, 10, 4], [0, 4, 5]]
@@ -73,15 +74,15 @@ condition = True
 count = 0
 
 print((f"\t Xn+1\t\t Yn+1\t\t Zn+1"))  # test data got 3 variables to iterate
-x_init = list(map(lambda y: "{:.6f}".format(y), x))  # maps 6 decimals after .
+x_init = list(map(lambda y: "{:.6f}".format(y), guess))  # maps 6 decimals after .
 print(f"{count}\t{x_init}")
-
-while condition:
+solution = linear_system_iterative_method(matrixb, b, guess)
+while condition or count < max_iterations:
     # for i in range(0, max_iterations):
-    solution = linear_system_iterative_method(matrixb, b, x)
-    x_formatted = list(map(lambda y: "{:.6f}".format(y), x))
+    next_solution = linear_system_iterative_method(matrixb, b, solution)
+    x_formatted = list(map(lambda y: "{:.6f}".format(y), solution))
     # a_logger.debug((f"{count+1}\t{x_formatted}"))  # print count and formatted values.
     print(f"{count+1}\t{x_formatted}")  # print count and formatted values.
-    condition = check_epsilon(0.001, x, solution)
+    condition = check_epsilon(0.001, solution, next_solution)
+    solution = next_solution
     count += 1
-    x = solution
