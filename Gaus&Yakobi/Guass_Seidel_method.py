@@ -53,7 +53,6 @@ def check_epsilon(epsilon, solution, next_solution):
     xr = solution[0]
     xr_1 = next_solution[0]
     check = abs(xr_1 - xr)
-
     return check < epsilon
 
 
@@ -83,5 +82,6 @@ while condition:
     x_formatted = list(map(lambda y: "{:.6f}".format(y), x))
     # a_logger.debug((f"{count+1}\t{x_formatted}"))  # print count and formatted values.
     print(f"{count+1}\t{x_formatted}")  # print count and formatted values.
-    condition = check_epsilon(0.001, solution, x)
-    # x = solution
+    condition = check_epsilon(0.001, x, solution)
+    count += 1
+    x = solution
