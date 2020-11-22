@@ -11,9 +11,9 @@ a_logger.addHandler(output_file_handler)
 a_logger.addHandler(stdout_handler)
 
 
-def gaus_seidel(matrix, result, x_variables):
+def linear_system_iterative_method(matrix, result, x_variables):
     """
-        Gaus Seidel algorithm, is an iterative method used to solve a system of
+        linear_system_iterative_method is an iterative method used to solve a system of
         linear equations. Can be applied to any matrix with non-zero elements
         on the diagonals, convergence is ony guarenteed if the matrix is either
         strictly diagonally dominant (D), or symmetric and positive definite.
@@ -49,20 +49,39 @@ def gaus_seidel(matrix, result, x_variables):
     return x_variables  # returns the updated values.
 
 
+def check_epsilon(epsilon, solution, next_solution):
+    xr = solution[0]
+    xr_1 = next_solution[0]
+    check = abs(xr_1 - xr)
+
+    return check < epsilon
+
+
 # Data Input (from class)
 
 max_iterations = int(input("Enter maximum iterations: "))
-x = [0, 0, 0]
-result = [2, 6, 5]
+x = [0, 0, 0]  # guess
+
+# convergence = false
 matrix = [[4, 2, 0], [2, 10, 4], [0, 4, 5]]
+result = [2, 6, 5]
+
+# convergence = true
+matrixb = [[3, -1, 1], [0, 1, -1], [1, 1, -2]]
+b = [4, -1, -3]
+
+condition = True
 count = 0
 
 print((f"\t Xn+1\t\t Yn+1\t\t Zn+1"))  # test data got 3 variables to iterate
 x_init = list(map(lambda y: "{:.6f}".format(y), x))  # maps 6 decimals after .
 print(f"{count}\t{x_init}")
 
-for i in range(0, max_iterations):
-    x = gaus_seidel(matrix, result, x)  # call gaus_seidel repeatedly
+while condition:
+    # for i in range(0, max_iterations):
+    solution = linear_system_iterative_method(matrixb, b, x)
     x_formatted = list(map(lambda y: "{:.6f}".format(y), x))
-    a_logger.debug((f"{count+1}\t{x_formatted}"))  # print count and formatted values.
-    count += 1
+    # a_logger.debug((f"{count+1}\t{x_formatted}"))  # print count and formatted values.
+    print(f"{count+1}\t{x_formatted}")  # print count and formatted values.
+    condition = check_epsilon(0.001, solution, x)
+    # x = solution
