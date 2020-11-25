@@ -11,7 +11,7 @@ a_logger.addHandler(output_file_handler)
 a_logger.addHandler(stdout_handler)
 
 
-def linear_system_iterative_method(matrix, result, x_variables):
+def linear_system_iterative_method(matrix, result, variables):
     """
         linear_system_iterative_method is an iterative method used to solve a system of
         linear equations. Can be applied to any matrix with non-zero elements
@@ -38,7 +38,7 @@ def linear_system_iterative_method(matrix, result, x_variables):
         x_variables - the variable column matrix (x)
     """
     size = len(matrix)
-    var = x_variables
+    var = variables.copy()
     for col in range(0, size):
         holder = result[col]
         for row in range(0, size):
@@ -51,16 +51,18 @@ def linear_system_iterative_method(matrix, result, x_variables):
 
 
 def check_epsilon(epsilon, solution, next_solution):
-    xr = solution[0]
-    xr_1 = next_solution[0]
-    check = abs(xr_1 - xr)
-    return check > epsilon
+    xr = [x for x in solution]
+    xr_1 = [x for x in next_solution]
+    check = True
+    for x in range(0, len(xr)):
+        if abs(xr_1[x] - xr[x]) < epsilon:
+            check = False
+    return check
 
 
 # Data Input (from class)
-
 max_iterations = int(input("Enter maximum iterations: "))
-guess = [0, 0, 0]  # guess
+xr = [0, 0, 0]  # guess
 
 # convergence = false
 matrix = [[4, 2, 0], [2, 10, 4], [0, 4, 5]]
@@ -73,16 +75,13 @@ b = [4, -1, -3]
 condition = True
 count = 0
 
-print((f"\t Xn+1\t\t Yn+1\t\t Zn+1"))  # test data got 3 variables to iterate
-x_init = list(map(lambda y: "{:.6f}".format(y), guess))  # maps 6 decimals after .
-print(f"{count}\t{x_init}")
-solution = linear_system_iterative_method(matrixb, b, guess)
-while condition or count < max_iterations:
+while condition:
     # for i in range(0, max_iterations):
-    next_solution = linear_system_iterative_method(matrixb, b, solution)
-    x_formatted = list(map(lambda y: "{:.6f}".format(y), solution))
+    xr_copy = xr.copy()
+    xr_1 = linear_system_iterative_method(matrix, result, xr)
+    x_formatted = list(map(lambda y: "{:.6f}".format(y), xr))
     # a_logger.debug((f"{count+1}\t{x_formatted}"))  # print count and formatted values.
     print(f"{count+1}\t{x_formatted}")  # print count and formatted values.
-    condition = check_epsilon(0.001, solution, next_solution)
-    solution = next_solution
+    condition = check_epsilon(0.0000001, xr, xr_1)
+    xr = xr_1
     count += 1
