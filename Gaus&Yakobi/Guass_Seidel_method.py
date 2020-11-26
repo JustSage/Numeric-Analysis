@@ -11,7 +11,7 @@ a_logger.addHandler(output_file_handler)
 a_logger.addHandler(stdout_handler)
 
 
-def linear_system_iterative_method(matrix, result, variables):
+def guassian_seidel_method(matrix, result, variables):
     """
         linear_system_iterative_method is an iterative method used to solve a system of
         linear equations. Can be applied to any matrix with non-zero elements
@@ -50,6 +50,21 @@ def linear_system_iterative_method(matrix, result, variables):
     return var  # returns the updated values.
 
 
+def jacobi_method(matrix, result, variables):
+    size = len(matrix)
+    var = variables.copy()
+    new_vars = []
+    for col in range(0, size):
+        holder = result[col]
+        for row in range(0, size):
+            if col != row:  # if not diagonal index
+                holder -= matrix[col][row] * var[row]
+                # calculating variables x**(val=0,1,2,3,...)
+        new_vars.append(holder / matrix[col][col])
+        # divide by dominant diagonal
+    return new_vars  # returns the updated values.
+
+
 def check_epsilon(epsilon, solution, next_solution):
     xr = [x for x in solution]
     xr_1 = [x for x in next_solution]
@@ -61,7 +76,7 @@ def check_epsilon(epsilon, solution, next_solution):
 
 
 # Data Input (from class)
-max_iterations = int(input("Enter maximum iterations: "))
+# max_iterations = int(input("Enter maximum iterations: "))
 xr = [0, 0, 0]  # guess
 
 # convergence = false
@@ -73,15 +88,26 @@ matrixb = [[3, -1, 1], [0, 1, -1], [1, 1, -2]]
 b = [4, -1, -3]
 
 condition = True
+epsilon = 0.0000001
 count = 0
 
+
+# while condition:
+#     xr_copy = xr.copy()
+#     xr_1 = guassian_seidel_method(matrix, result, xr)
+#     x_formatted = list(map(lambda y: "{:.6f}".format(y), xr))
+#     # a_logger.debug((f"{count+1}\t{x_formatted}"))  # print count and formatted values.
+#     print(f"{count+1}\t{x_formatted}")
+#     condition = check_epsilon(epsilon, xr, xr_1)
+#     xr = xr_1
+#     count += 1
+
 while condition:
-    # for i in range(0, max_iterations):
     xr_copy = xr.copy()
-    xr_1 = linear_system_iterative_method(matrix, result, xr)
+    xr_1 = jacobi_method(matrixb, b, xr)
     x_formatted = list(map(lambda y: "{:.6f}".format(y), xr))
+    print(f"{count+1}\t{x_formatted}")
     # a_logger.debug((f"{count+1}\t{x_formatted}"))  # print count and formatted values.
-    print(f"{count+1}\t{x_formatted}")  # print count and formatted values.
-    condition = check_epsilon(0.0000001, xr, xr_1)
+    condition = check_epsilon(0.00000001, xr, xr_1)
     xr = xr_1
     count += 1
