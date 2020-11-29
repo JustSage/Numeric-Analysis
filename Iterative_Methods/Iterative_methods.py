@@ -1,3 +1,6 @@
+# Name : Sagie Baram
+
+
 def square_matrix_generator(n):
     """
     Generating an n on n matrix based on user input.
