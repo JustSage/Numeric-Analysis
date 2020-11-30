@@ -157,7 +157,7 @@ def linear_system_iterative_method(iterative_method, matrix, result, xr, epsilon
 
 def main():
     # Data Input (from class)
-    xr = [0, 0, 0]  # guess
+    x0 = [0, 0, 0]  # guess
 
     epsilon = 0.0000001
 
@@ -170,13 +170,13 @@ def main():
     result = [2, 6, 5]
 
     print("\nResults for matrix with convergence using Jacobi")
-    linear_system_iterative_method(jacobi_method, matrixb, b, xr, epsilon)
+    linear_system_iterative_method(jacobi_method, matrixb, b, x0, epsilon)
     print("\nResults for matrix with convergence using Guassian-Seidel")
-    linear_system_iterative_method(guassian_seidel_method, matrixb, b, xr, epsilon)
+    linear_system_iterative_method(guassian_seidel_method, matrixb, b, x0, epsilon)
     print("\nResults for matrix without convergence using Jacobi")
-    linear_system_iterative_method(jacobi_method, matrix, result, xr, epsilon)
+    linear_system_iterative_method(jacobi_method, matrix, result, x0, epsilon)
     print("\nResults for matrix without convergence using Guassian-Seidel")
-    linear_system_iterative_method(guassian_seidel_method, matrix, result, xr, epsilon)
+    linear_system_iterative_method(guassian_seidel_method, matrix, result, x0, epsilon)
 
 
 main()
