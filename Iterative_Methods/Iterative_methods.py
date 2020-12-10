@@ -1,5 +1,5 @@
 # Name : Sagie Baram
-# ID : 205591829
+
 import numpy as np
 
 def square_matrix_generator(n):
