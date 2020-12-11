@@ -64,6 +64,7 @@ def find_roots(f,a,b,step=0.1,tol=0.0001):
     for x in np.arange(a,b + step,step): 
         if f(x) * f(x+step) < 0:
             root = bisection(f,x,x+step,tol,max_iter)
+            roots.append(root)
             print(f"x{index} = {root:.3f}")
             index += 1
 
@@ -74,10 +75,10 @@ def find_roots(f,a,b,step=0.1,tol=0.0001):
             root = bisection(fd, x, x+step, tol, max_iter)
             # if root close to 0 or 0
             if isclose(f(root), 0.0, abs_tol=tol):
+                # root can be -0.e (still 0)
                 print(f"x{index} = {root:.3f} (from derived function)")
                 roots.append(root) 
                 index += 1
-
     return roots #returns a list of roots
 
 # set environment
@@ -99,7 +100,7 @@ def create_graph(f, roots):
     # draw coertisan grid
     cartesian_coordinate_system.draw()
     plt.plot(x,f(x)) # draw function
-    plt.plot(xs,ys, "ro") # draw roots
+    plt.plot(xs,ys, "ro", marker='o') # draw roots
     plt.title("Graph view:")
 
     # info on the lower right side.
@@ -119,7 +120,6 @@ def main():
     p = int(input("Enter polynomial virtue (p): "))
     k = p
     construct = []
-
     print(f"Create a polynomial function of virtue {p}:")
     while k >= 0:
         if k != 0:
@@ -127,7 +127,8 @@ def main():
         else:
             construct.append(int(input(f"Enter a free number: ")))
         k -= 1
-    print(f"Enter range of inspection: ")
+    print(f"Enter range of inspection:\n")
+
     start_point = float(input("Starting point: "))
     end_point = float(input("Ending point: "))
     
