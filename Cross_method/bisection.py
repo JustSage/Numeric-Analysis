@@ -16,7 +16,11 @@ def bisection(f,a,b,tol,max_iter):
     
     :return: mid - a suspicious root.
 
-    the bisection method is a root-finding method that applies to any continuous functions for which one knows two values with opposite signs. The method consists of repeatedly bisecting the interval defined by these values and then selecting the subinterval in which the function changes sign, and therefore must contain a root.
+    The bisection method is a root-finding method that applies to any continuous
+    functions for which one knows two values with opposite signs.
+    The method consists of repeatedly bisecting the interval 
+    defined by these values and then selecting the subinterval in which the function changes sign,
+    and therefore must contain a root.
     """
     xl, xr, count = a, b, 0
     while np.abs(xr-xl) >= tol:
@@ -34,7 +38,8 @@ def find_derivative(func):
     :variable: func - function given to derive.
     :return: ftag - derived function.
     
-    this function uses sympy library to convert the function into it's derivative function and creating a lambda function using lambdify for usage.
+    This function uses sympy library to convert the function into it's derivative function 
+    and creating a lambda function using lambdify for the derivative function.
     """
     x = symbols("x") # manipulates x into a symbol
     ftag = diff(func(x),x) # differential of x
@@ -81,7 +86,6 @@ def find_roots(f,a,b,step=0.1,tol=0.0001):
                 index += 1
     return roots #returns a list of roots
 
-# set environment
 def create_graph(f, roots):
     """
     :variable: f - polynomial function
@@ -115,12 +119,13 @@ def create_graph(f, roots):
                     textcoords='offset pixels', # how to position the text
                     xytext=(0,0), # distance from text to points (x,y)
                     ha='center') # horizontal alignment can be left, right or center
+    plt.savefig('images/function.png', bbox_inches='tight')
 
 def main():
     p = int(input("Enter polynomial virtue (p): "))
     k = p
     construct = []
-    print(f"Create a polynomial function of virtue {p}:")
+    print(f"Create a polynomial function of virtue {p}:\n")
     while k >= 0:
         if k != 0:
             construct.append(int(input(f"Enter coefficient of X**{k}:")))
@@ -131,7 +136,8 @@ def main():
 
     start_point = float(input("Starting point: "))
     end_point = float(input("Ending point: "))
-    
+    print("\n")
+
     f = np.poly1d(construct) # constructs a function
     create_graph(f,find_roots(f, start_point, end_point))
 
