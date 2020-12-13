@@ -23,4 +23,11 @@
 	If you have jupyter server you can view the graph after running the code.
 	On the top and bottom of the bisection.py file you can click run Above/Below next to the #%% signs.
 
+**Output Example:**
+
+	x**4 + x**3 - 3x**2
+	inspection range: [-3,2]
+	x0 = -2.303
+	x1 = 1.303
+	x2 = 0.000
 ![Example](images/example.png)

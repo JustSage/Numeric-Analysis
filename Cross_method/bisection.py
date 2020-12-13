@@ -82,7 +82,7 @@ def find_roots(f,a,b,step=0.1,tol=0.0001):
             if isclose(f(root), 0.0, abs_tol=tol):
                 # root can be -0.e (still 0)
                 print(f"x{index} = {root:.3f} (from derived function)")
-                roots.append(root) 
+                roots.append(root)
                 index += 1
     return roots #returns a list of roots
 
@@ -136,9 +136,11 @@ def main():
 
     start_point = float(input("Starting point: "))
     end_point = float(input("Ending point: "))
-    print("\n")
+
 
     f = np.poly1d(construct) # constructs a function
+    print(f"Function of virtue {p}\n\n{f}")
+    print(f"\nInspection Range: [{start_point},{end_point}]\n")
     create_graph(f,find_roots(f, start_point, end_point))
 
 if __name__ == "__main__":
