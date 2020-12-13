@@ -12,7 +12,7 @@
 
 **External axes class:**
 
-	used to display coertisan grid.
+	Used to display coertisan grid.
 
 **How to Use:**
 
