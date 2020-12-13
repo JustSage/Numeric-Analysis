@@ -23,4 +23,4 @@
 	If you have jupyter server you can view the graph after running the code.
 	On the top and bottom of the bisection.py file you can click run Above/Below next to the #%% signs.
 
-![Example](/images/example.png)
+![Example](images/example.png)
