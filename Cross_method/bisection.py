@@ -81,7 +81,6 @@ def find_roots(f,a,b,step=0.1,tol=0.0001):
                 roots.append(root)
                 print(f"x{index} = {root:.3f} (from derived function)")
                 index += 1 
-
     return roots #returns a list of roots
 
 

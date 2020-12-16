@@ -23,11 +23,18 @@
 	If you have jupyter server you can view the graph after running the code.
 	On the top and bottom of the bisection.py file you can click run Above/Below next to the #%% signs.
 
-**Output Example:**
+**Output example:**
+	Function of virtue 4
 
-	x**4 + x**3 - 3x**2
-	inspection range: [-3,2]
+		 4     3     2
+	1 x + 1 x - 3 x
+
+
+	Inspection Range: [-3.0,2.0]
+
 	x0 = -2.303
 	x1 = 1.303
-	x2 = 0.000
+	x2 = -0.000 (from derived function)
+	Inspection Range: [-3.0,2.0]
+
 ![Example](images/example.png)
