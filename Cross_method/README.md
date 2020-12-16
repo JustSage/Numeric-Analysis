@@ -10,6 +10,10 @@
 - `pip install sympy`
 - `pip install matplotlib`
 
+**External axes class:**
+
+	Used to display coertisan grid.
+
 **How to Use:**
 
 	1.Enter the polynomial virtue.
