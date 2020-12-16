@@ -64,6 +64,7 @@ def find_roots(f,a,b,step=0.1,tol=0.0001):
     x = a 
     roots = []
     max_iter = -1 * (log(tol/(b-a))/log(2))
+    fd = find_derivative(f)
 
     # searching for roots in given function.
     for x in np.arange(a,b + step,step): 
@@ -72,19 +73,17 @@ def find_roots(f,a,b,step=0.1,tol=0.0001):
             roots.append(root)
             print(f"x{index} = {root:.3f}")
             index += 1
-
-    # searching for roots in derived function.
-    fd = find_derivative(f)
-    for x in np.arange(a, b + step,step):
+            # searching for roots in derived function.
         if fd(x) * fd(x+step) < 0:
-            root = bisection(fd, x, x+step, tol, max_iter)
-            # if root close to 0 or 0
+            root = bisection(fd,x, x+step, tol, max_iter)
             if isclose(f(root), 0.0, abs_tol=tol):
                 # root can be -0.e (still 0)
-                print(f"x{index} = {root:.3f} (from derived function)")
                 roots.append(root)
-                index += 1
+                print(f"x{index} = {root:.3f} (from derived function)")
+                index += 1 
+
     return roots #returns a list of roots
+
 
 def create_graph(f, roots):
     """
