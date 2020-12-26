@@ -28,7 +28,8 @@
 	On the top and bottom of the bisection.py file you can click run Above/Below next to the #%% signs.
 
 **Output example:**
-	Function of virtue 4
+
+	Function of virtue 4:
 
 		 4     3     2
 	1 x + 1 x - 3 x
