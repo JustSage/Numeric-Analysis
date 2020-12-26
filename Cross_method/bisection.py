@@ -119,7 +119,7 @@ def create_graph(f, roots):
                     ha='center') # horizontal alignment can be left, right or center
     plt.savefig('images/function.png', bbox_inches='tight')
 
-def main():
+def input_poly():
     p = int(input("Enter polynomial virtue (p): "))
     k = p
     construct = []
@@ -130,15 +130,18 @@ def main():
         else:
             construct.append(int(input(f"Enter a free number: ")))
         k -= 1
-    print(f"Enter range of inspection:\n")
+    return np.poly1d(construct), p
+    
+def main():
+    f,p = input_poly() # construct a polynom
 
+    print(f"Enter range of inspection:\n")
     start_point = float(input("Starting point: "))
     end_point = float(input("Ending point: "))
 
-
-    f = np.poly1d(construct) # constructs a function
     print(f"Function of virtue {p}\n\n{f}")
     print(f"\nInspection Range: [{start_point},{end_point}]\n")
+
     create_graph(f,find_roots(f, start_point, end_point))
 
 if __name__ == "__main__":
