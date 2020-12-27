@@ -28,7 +28,7 @@
 
 	2.The program will output Newton Raphson output -> Secant output iteratively.
 	3.If there were no roots found in either of the functions
-		the user can decrease step size to search deeper (can't go below tolerance).
+	  the user can decrease step size to search deeper (can't go below tolerance).
 	4.If no roots were found by searching deeper, it means the guess was not close enough.
 
 **Please note:**
