@@ -1,3 +1,5 @@
+# Sagie Baram
+
 import numpy as np
 import math,warnings,TableIt
 from sympy import diff, sympify,lambdify,symbols
